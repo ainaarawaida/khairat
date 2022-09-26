@@ -174,6 +174,20 @@ class Yourun_Public {
 				unset( $menu_links[ 'orders' ] );
 				$menu_links = array( 'daftarkariah' => 'Daftar Kariah' ) + $menu_links ; 
 				
+			}else if($stage_daftar == 1 || $stage_daftar == 2){
+				unset( $menu_links[ 'edit-address' ] ); // Addresses
+				unset( $menu_links[ 'downloads' ] ); // Disable Downloads
+				unset( $menu_links[ 'orders' ] );
+				
+				$menu_links = array_slice( $menu_links, 0, 1, true ) 
+				+ array( '?luqpage=kariah_senaraiahli' => 'Senarai Ahli' )
+			+ array( '?luqpage=kariah_maklumatkariah' => 'Maklumat Kariah' )
+			
+			+ array_slice( $menu_links, 1, NULL, true );
+
+			
+
+				
 			}
 
 			return $menu_links;
@@ -189,7 +203,7 @@ class Yourun_Public {
 				$menu_links = array( 'daftarahli' => 'Daftar Ahli' ) + $menu_links ; 
 				
 			}
-			if($stage_daftar == 1){
+			if($stage_daftar == 1 || $stage_daftar == 2){
 				unset( $menu_links[ 'edit-address' ] ); // Addresses
 				unset( $menu_links[ 'downloads' ] ); // Disable Downloads
 				unset( $menu_links[ 'orders' ] );
@@ -298,8 +312,44 @@ class Yourun_Public {
 
 
 	public function yourun_woocommerce_account_dashboard(){
-		require_once YOURUN_PATH . '/public/yourun_woocommerce_account_dashboard.php' ;
+		global $wp , $wpdb ; 
+		$current_user = wp_get_current_user() ; 
 
+		if ( array_key_exists('pentadbir', $current_user->allcaps)){
+			$check_author_site_name = $wpdb->get_results( 
+				$wpdb->prepare("SELECT ID,post_name,post_title FROM {$wpdb->prefix}posts WHERE post_type =%s AND post_author = %d", array('yourun_page_name', get_current_user_id())) 
+			);
+
+		}
+
+		// require_once YOURUN_PATH . '/public/clearDashboard.php' ;
+
+		if($_GET['luqpage'] && str_contains($_GET['luqpage'], 'kariah_maklumatkariah')){
+			require_once YOURUN_PATH . '/public/kariah_maklumatkariah.php' ;
+
+		}else if($_GET['luqpage'] && str_contains($_GET['luqpage'], 'kariah_senaraiahli')){
+			if($_GET['kariah_senaraiahli_edit']){
+				require_once YOURUN_PATH . '/public/kariah_senaraiahli_edit.php' ;
+			}else if($_GET['kariah_daftarahli']){
+				require_once YOURUN_PATH . '/public/kariah_daftarahli.php' ;
+			}else if($_GET['kariah_senaraiahlixaktif']){
+				require_once YOURUN_PATH . '/public/kariah_senaraiahlixaktif.php' ;
+			}else{
+				
+				require_once YOURUN_PATH . '/public/kariah_senaraiahli.php' ;
+			}
+			
+
+		}else{
+			if ( array_key_exists('pentadbir', $current_user->allcaps)){
+				require_once YOURUN_PATH . '/public/kariah_dashboard.php' ;
+			}else{
+				require_once YOURUN_PATH . '/public/ahli_dashboard.php' ;
+			}
+			
+
+		}
+		
 
 
 	}

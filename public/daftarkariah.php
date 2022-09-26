@@ -58,7 +58,7 @@ if(isset($_POST['action']) && $_POST['action'] === 'save_site_details' && $_POST
     }
     update_post_meta($my_post['ID'], 'alamat_kariah', $_POST['alamat_kariah']) ; 
     update_user_meta(get_current_user_id(), 'stage_daftar', 1) ; 
-     
+    update_user_meta(get_current_user_id(), 'jenis_ahli', 3) ; 
     
 
 
@@ -94,7 +94,7 @@ if(isset($_POST['action']) && $_POST['action'] === 'save_site_details' && ($_POS
         <div class="woocommerce-notices-wrapper">
             <ul class="woocommerce-message" role="alert">
                     <li data-id="account_first_name">
-                    <strong>Successul Update		</li>
+                    <strong>Successul Update</strong>	 <a href="<?php echo get_home_url()."/my-account"; ?>">Lihat Dashboard Kariah</a> </li>
             </ul>
         </div>
 
@@ -141,4 +141,6 @@ if(isset($_POST['action']) && $_POST['action'] === 'save_site_details' && ($_POS
 
 
 
+<script>
 
+</script>

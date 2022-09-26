@@ -1,15 +1,4 @@
-<script>
 
-    document.addEventListener("DOMContentLoaded", function(){
-            let ele = document.querySelectorAll(".woocommerce-MyAccount-content p") ;
-            ele[0].innerHTML = "" ;
-            ele[1].innerHTML = "" ;
-           
-        
-        
-    });
-    
-</script>
 
 
 <link rel="stylesheet" href="<?php echo YOURUN_URL.'/public/css/jquery.dataTables.min.css'   ; ?>">

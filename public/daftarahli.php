@@ -30,6 +30,9 @@ if(isset($_POST['action']) && $_POST['action'] === 'save_pendaftaran_ahli' ){
     update_user_meta(get_current_user_id(), 'alamat_ahli', $_POST['alamat_ahli']) ; 
     update_user_meta(get_current_user_id(), 'select_kariah', $_POST['select_kariah']) ; 
     update_user_meta(get_current_user_id(), 'stage_daftar', 1) ; 
+    update_user_meta(get_current_user_id(), 'jenis_ahli', 2) ; 
+
+    
 }
 
 
@@ -47,7 +50,7 @@ if(isset($_POST['action']) && $_POST['action'] === 'save_pendaftaran_ahli' ){
         <div class="woocommerce-notices-wrapper">
             <ul class="woocommerce-message" role="alert">
                     <li data-id="account_first_name">
-                    <strong>Successul Update</strong> <a href="<?php echo get_home_url()."/my-account/maklumatahli"; ?>">View Dashboard</a> </li>
+                    <strong>Successul Update</strong> <a href="<?php echo get_home_url()."/my-account/maklumatahli"; ?>">Lihat Maklumat Ahli</a> </li>
             </ul>
         </div>
 
@@ -84,7 +87,7 @@ if(isset($_POST['action']) && $_POST['action'] === 'save_pendaftaran_ahli' ){
   <div class="row">
     <div class="col">
     
-                <input placeholder="No. Kad Pengenalan" type="number" class="woocommerce-Input woocommerce-Input--text input-text" name="kad_pengenalan_ahli" id="kad_pengenalan_ahli" value="<?php echo isset($kad_pengenalan_ahli) ? $kad_pengenalan_ahli : $_POST['kad_pengenalan_ahli'] ; ?>" required> 
+                <input placeholder="No. Kad Pengenalan" min="100000000000" type="number" class="woocommerce-Input woocommerce-Input--text input-text" name="kad_pengenalan_ahli" id="kad_pengenalan_ahli" value="<?php echo isset($kad_pengenalan_ahli) ? $kad_pengenalan_ahli : $_POST['kad_pengenalan_ahli'] ; ?>" required> 
         
     </div>
     <div class="col">
